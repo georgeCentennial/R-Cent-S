@@ -8,6 +8,7 @@ import Template from './../template.js'
 import userRoutes from './routes/user.routes.js'
 //import authRoutes from './routes/auth.routes'
 import authRoutes from './routes/auth.routes.js'
+import postRoutes from './routes/post.routes.js'
 
 const app = express()
 
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/', userRoutes)
 app.use('/', authRoutes)
+app.use('/', postRoutes)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
