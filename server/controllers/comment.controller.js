@@ -21,17 +21,28 @@ const create = async (req, res) => {
     }   
 }
 
-const read = async (req, res) => {
+const list = async (req, res) => { 
+    try {
+        let comments = await Comment.find().select('user post comment created updated') 
+        res.json(comments)
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err) 
+        })
+    } 
+}
+
+const read = (req, res) => {
     return res.json(req.comment);
 }
 
 const update = async (req, res) => {
     try{
         let comment = req.comment;
-        comment = extend(comment, fields);
+        comment = extend(comment, req.body) //just update comment
         comment.updated = Date.now();
-        let result = await comment.save();
-        res.json(result);
+        await comment.save();
+        res.json(comment);
     }catch(err){
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err)
@@ -42,7 +53,7 @@ const update = async (req, res) => {
 const remove = async (req, res) => {
     try{
         let comment = req.comment;
-        let deletedComment = await comment.remove();
+        let deletedComment = await comment.deleteOne();
         res.json(deletedComment);
     }catch(err){
         return res.json({
@@ -50,6 +61,7 @@ const remove = async (req, res) => {
         })
     }
 }
+
 //get comments by post
 const listByPost = async (req, res) => {
     try{
@@ -62,11 +74,32 @@ const listByPost = async (req, res) => {
     }
 }
 
+const commentById = async (req, res, next, id) => {
+    try {
+      let comment = await Comment.findById(id).select('user post comment created updated'); 
+      if (!comment) {
+        return res.status(400).json({
+          error: "Comment not found"
+        });
+      }
+      req.comment = comment; 
+      next(); // Proceed to the next middleware or route handler
+    } catch (err) {
+      return res.status(400).json({
+        error: "Could not retrieve comment"
+      });
+    }
+}
+
 //is comment by user
-const isOwner = async (req, res) => {
-    
+const isOwner = (req, res, next) => {
+    const authorized = req.comment && req.auth && req.auth._id == req.comment.user;
+    if (!authorized) {
+        return res.status(403).json({ error: "User is not authorized" });
+    }
+    next();
 }
 
 export default {
-    create, read, update, remove, listByPost, isOwner
+    create, list, commentById, read, update, remove, listByPost, isOwner
 }
