@@ -72,9 +72,6 @@ const remove = async (req, res) => {
         deletedPost.hashed_password = undefined
         deletedPost.salt = undefined
         res.json(deletedPost)
-        return res.status(200).json({ 
-        message: "Successfully deleted!"
-        });
     } catch (err) {
         return res.status(400).json({
         error: errorHandler.getErrorMessage(err) 
