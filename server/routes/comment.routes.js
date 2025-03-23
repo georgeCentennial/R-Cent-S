@@ -8,7 +8,7 @@ router.route('/api/comments')
 .post(commentCtrl.create)
 
 router.route('/api/comments/:commentId')
-.get(authCtrl.requireSignin, commentCtrl.isOwner, commentCtrl.read)
+.get(authCtrl.requireSignin, commentCtrl.read)
 .put(authCtrl.requireSignin, commentCtrl.isOwner, commentCtrl.update)
 .delete(authCtrl.requireSignin, commentCtrl.isOwner, commentCtrl.remove)
 
