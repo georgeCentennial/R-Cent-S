@@ -29,7 +29,7 @@ const list = async (req, res) => {
 
 const postByID = async (req, res, next, id) => { 
     try {
-        let post = await Post.findById(id) 
+        let post = await Post.findById(id)
         if (!post)
             return res.status(400).json({ 
                 error: "post not found"
@@ -104,7 +104,7 @@ const removeMany = async (req, res) => {
 
 //is post by user
 const isOwner = (req, res, next) => {
-    const authorized = req.post && req.auth && req.auth._id == req.post.userid;
+    const authorized = req.post && req.auth && req.auth._id == req.post.userId;
     if (!authorized) {
         return res.status(403).json({ error: "User is not authorized" });
     }
