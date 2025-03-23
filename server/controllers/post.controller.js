@@ -104,7 +104,7 @@ const removeMany = async (req, res) => {
 
 //is post by user
 const isOwner = (req, res, next) => {
-    const authorized = req.profile && req.auth && req.auth._id == req.post.userid;
+    const authorized = req.post && req.auth && req.auth._id == req.post.userid;
     if (!authorized) {
         return res.status(403).json({ error: "User is not authorized" });
     }
