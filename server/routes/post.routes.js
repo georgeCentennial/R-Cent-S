@@ -19,7 +19,7 @@ router.route('/api/posts')
 .delete(postCtrl.removeMany)
 router.param('postId', postCtrl.postByID)
 router.route('/api/posts/:postId')
-.get(authCtrl.requireSignin, postCtrl.read) 
+.get(postCtrl.read) 
 .put(authCtrl.requireSignin, postCtrl.isOwner, postCtrl.update) //put auth
 .delete(authCtrl.requireSignin, postCtrl.isOwner, postCtrl.remove) //put auth
 
