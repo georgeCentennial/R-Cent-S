@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import HomeIcon from '@material-ui/icons/Home'
 import Button from '@material-ui/core/Button'
-import auth from '../lib/auth-helper'
+import auth from '../auth/auth-helper'
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 
@@ -15,20 +15,19 @@ const isActive = (location, path) => {
 export default function Menu(){ 
   const navigate = useNavigate();
   const location = useLocation();
+  const home = auth.isAuthenticated() ? "/feed" : "/";
+  const userId = "" ;//auth.isAuthenticated().user._id;
 
   return (
   <AppBar position="static">
     <Toolbar>
       <Typography variant="h6" color="inherit">
-        MERN Skeleton
+        R-Cent-S
       </Typography>
-      <Link to="/">
-        <IconButton aria-label="Home" style={isActive(location, "/")}>
+      <Link to={home}>
+        <IconButton aria-label="Home" style={isActive(location, home)}>
           <HomeIcon/>
         </IconButton>
-      </Link>
-      <Link to="/users">
-        <Button style={isActive(location, "/users")}>Users</Button>
       </Link>
       {
         !auth.isAuthenticated() && (<span>
@@ -44,11 +43,21 @@ export default function Menu(){
       }
       {
         auth.isAuthenticated() && (<span>
-          <Link to={"/user/" + auth.isAuthenticated().user._id}>
-            <Button style={isActive(location, "/user/" + auth.isAuthenticated().user._id)}>My Profile</Button>
+          {/* //create API path for posts */}
+          <Link to={"/posts/" + userId}> 
+            <Button style={isActive(location, "/posts/" + userId)}>My Posts</Button>
+          </Link>
+          <Link to={"/comments/" + userId}> 
+            <Button style={isActive(location, "/comments/" + userId)}>My Comments</Button>
+          </Link>
+          <Link to={"/users/"}>
+            <Button style={isActive(location, "/users")}>Users</Button>
+          </Link>
+          <Link to={"/users/" + userId}>
+            <Button style={isActive(location, "/users/" + userId)}>My Profile</Button>
           </Link>
           <Button color="inherit" onClick={() => {
-               auth.clearJWT(() => navigate('/'));
+              auth.clearJWT(() => navigate('/'));
             }}>Sign out</Button>
         </span>)
       }
