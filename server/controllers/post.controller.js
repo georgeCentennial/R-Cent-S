@@ -7,7 +7,7 @@ const create = async (req, res) => {
     try {
         await post.save()
         return res.status(200).json({ 
-            message: "Successfully Created!"
+            post
         })
     } catch (err) {
         return res.status(400).json({
@@ -18,7 +18,9 @@ const create = async (req, res) => {
 
 const list = async (req, res) => { 
     try {
-        let posts = await Post.find().select('userId content created updated') 
+        let posts = await Post.find().select('userId content created updated')
+        .populate('userId', 'lastname firstname username')
+        .sort({created: -1})
         res.json(posts)
     } catch (err) {
         return res.status(400).json({
