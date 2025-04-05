@@ -3,9 +3,9 @@ import mongoose from 'mongoose'
 
 const PostSchema = new mongoose.Schema({
    userId: {
-      type: String,
-      trim: true,
-      required: 'UserId is required'
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: true
    },  
    content: {
       type: String,

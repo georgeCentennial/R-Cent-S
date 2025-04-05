@@ -39,6 +39,10 @@ export default function Menu(){
             <Button style={isActive(location, "/signin")}>Sign In
             </Button>
           </Link>
+          <Link to="/feed">
+            <Button style={isActive(location, "/feed")}>Feed
+            </Button>
+          </Link>
         </span>)
       }
       {
