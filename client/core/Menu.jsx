@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import HomeIcon from '@material-ui/icons/Home'
 import Button from '@material-ui/core/Button'
-import auth from '../auth/auth-helper'
+import auth from '../lib/auth-helper.js'
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 
@@ -16,7 +16,8 @@ export default function Menu(){
   const navigate = useNavigate();
   const location = useLocation();
   const home = auth.isAuthenticated() ? "/feed" : "/";
-  const userId = "" ;//auth.isAuthenticated().user._id;
+  const userId = auth.isAuthenticated()?.user?._id;
+  const profileLink = userId ? `/users/${userId}` : ''; // Correct template string
 
   return (
   <AppBar position="static">
@@ -30,7 +31,8 @@ export default function Menu(){
         </IconButton>
       </Link>
       {
-        !auth.isAuthenticated() && (<span>
+        !auth.isAuthenticated() 
+        && (<span>
           <Link to="/signup">
             <Button style={isActive(location, "/signup")}>Sign up
             </Button>
@@ -39,15 +41,16 @@ export default function Menu(){
             <Button style={isActive(location, "/signin")}>Sign In
             </Button>
           </Link>
+        </span>)
+      }
+      {
+        auth.isAuthenticated() 
+        && (<span>
+          {/* //create API path for posts */}
           <Link to="/feed">
             <Button style={isActive(location, "/feed")}>Feed
             </Button>
           </Link>
-        </span>)
-      }
-      {
-        auth.isAuthenticated() && (<span>
-          {/* //create API path for posts */}
           <Link to={"/posts/" + userId}> 
             <Button style={isActive(location, "/posts/" + userId)}>My Posts</Button>
           </Link>
