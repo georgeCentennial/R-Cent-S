@@ -18,7 +18,7 @@ function PostsList({ posts }) {
                         <Typography variant="h3" color="text.secondary">
                             {post.content}
                         </Typography>
-                        <Typography align='right'>{new Date(post.created).toLocaleDateString()}</Typography>
+                        <Typography align='right'>{new Date(post.created).toDateString()}</Typography>
                     </CardContent>
                 </Card>
                 )))
