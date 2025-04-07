@@ -33,6 +33,8 @@ export default function Menu(){
       {
         !auth.isAuthenticated() 
         && (<span>
+          <Link to="/comment/"><Button style={isActive(location, "/comment/")}>Comments</Button></Link>
+
           <Link to="/signup">
             <Button style={isActive(location, "/signup")}>Sign up
             </Button>
