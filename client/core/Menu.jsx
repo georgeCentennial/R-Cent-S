@@ -51,11 +51,11 @@ export default function Menu(){
             <Button style={isActive(location, "/feed")}>Feed
             </Button>
           </Link>
-          <Link to={"/posts/" + userId}> 
-            <Button style={isActive(location, "/posts/" + userId)}>My Posts</Button>
+          <Link to={"/myposts"}> 
+            <Button style={isActive(location, "/myposts")}>My Posts</Button>
           </Link>
-          <Link to={"/comments/" + userId}> 
-            <Button style={isActive(location, "/comments/" + userId)}>My Comments</Button>
+          <Link to={"/mycomments"}> 
+            <Button style={isActive(location, "/mycomments")}>My Comments</Button>
           </Link>
           <Link to={"/users/"}>
             <Button style={isActive(location, "/users")}>Users</Button>

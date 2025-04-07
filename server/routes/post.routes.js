@@ -22,5 +22,7 @@ router.route('/api/posts/:postId')
 .get(postCtrl.read) 
 .put(authCtrl.requireSignin, postCtrl.isOwner, postCtrl.update) //put auth
 .delete(authCtrl.requireSignin, postCtrl.isOwner, postCtrl.remove) //put auth
+router.route('/api/posts/user/:userId')
+.get(authCtrl.requireSignin, postCtrl.postsByUser)
 
 export default router

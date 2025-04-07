@@ -46,9 +46,9 @@ const postByID = async (req, res, next, id) => {
 }
 
 const read = (req, res) => {
-req.post.hashed_password = undefined 
-req.post.salt = undefined
-return res.json(req.post) 
+    req.post.hashed_password = undefined 
+    req.post.salt = undefined
+    return res.json(req.post) 
 }
 
 const update = async (req, res) => { 
@@ -110,4 +110,18 @@ const isOwner = (req, res, next) => {
     next();
 }
 
-export default { create, postByID, read, list, remove, removeMany, update, isOwner }
+const postsByUser = async (req, res)  => {
+    const {userId} = req.params;
+    try {
+        let posts = await Post.find({ userId }).select('userId content created updated')
+        .populate('userId', 'lastname firstname username')
+        .sort({created: -1})
+        res.json(posts)
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err) 
+        })
+    } 
+}
+
+export default { create, postByID, read, list, remove, removeMany, update, isOwner, postsByUser }

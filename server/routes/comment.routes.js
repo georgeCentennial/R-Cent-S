@@ -14,5 +14,11 @@ router.route('/api/comments/:commentId')
 
 router.param('commentId', commentCtrl.commentById);
 
+router.route('/api/comments/user/:userId')
+.get(authCtrl.requireSignin, commentCtrl.commentsByUser)
+
+router.route('/api/comments/post/:postId')
+.get(authCtrl.requireSignin, commentCtrl.commentsByPost)
+
 
 export default router;
