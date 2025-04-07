@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import auth from '../lib/auth-helper.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +23,7 @@ export default function PostForm({ onPostCreated }) {
 
   const classes = useStyles();
   const onSubmit = async (data) => {
-    const userId = "67df5c9ecfafd6560a2db730";// need from auth
+    const userId = auth.isAuthenticated().user._id;
     const formData = {userId, ...data};
     try {
       const response = await fetch("api/posts", {

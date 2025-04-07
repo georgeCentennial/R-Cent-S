@@ -100,6 +100,35 @@ const isOwner = (req, res, next) => {
     next();
 }
 
+
+const commentsByUser = async (req, res)  => {
+    const {userId} = req.params;
+    try {
+        let comments = await Comment.find({ user: userId }).select('user comment created updated')
+        .populate('user', 'lastname firstname username')
+        .sort({created: -1})
+        res.json(comments)
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err) 
+        })
+    } 
+}
+
+const commentsByPost = async (req, res)  => {
+    const {postId} = req.params;
+    try {
+        let comments = await Comment.find({ post: postId }).select('user post comment created updated')
+        .populate('user', 'lastname firstname username')
+        .sort({created: -1})
+        res.json(comments)
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err) 
+        })
+    } 
+}
+
 export default {
-    create, list, commentById, read, update, remove, listByPost, isOwner
+    create, list, commentById, read, update, remove, listByPost, isOwner, commentsByUser, commentsByPost
 }
