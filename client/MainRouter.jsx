@@ -12,6 +12,10 @@ import PrivateRoute from './lib/PrivateRoute.jsx'
 import Menu from './core/Menu'
 //my posts
 import MyCommentsPage from './pages/MyCommentsPage.jsx';
+import Comments from './comment/comment.jsx'
+import Usercomment from './comment/usercomment.jsx'
+import Editcomment from './comment/editcomment.jsx'
+import Deletecomment from './comment/deletecomment.jsx'
 // everything you dictate here is the route for all
 
 function MainRouter() {
@@ -48,7 +52,12 @@ function MainRouter() {
                     <MyCommentsPage/>
                 </PrivateRoute>
             } />
-            
+            <Route path="/comment" element={<Comments/>}/> 
+            <Route path="/usercomment/:commentId" element={<Usercomment />} />
+
+            <Route path="/editcomment" element ={<Editcomment/>}/>
+            <Route path="/deletecomment" element ={<Deletecomment/>}/>
+         
         </Routes>
     </div>
     )
