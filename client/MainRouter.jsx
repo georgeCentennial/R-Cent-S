@@ -10,6 +10,12 @@ import EditProfile from './user/EditProfile.jsx'
 import Signin from './lib/Signin.jsx'
 import PrivateRoute from './lib/PrivateRoute.jsx'
 import Menu from './core/Menu'
+import Comments from './comment/comment.jsx'
+import Usercomment from './comment/usercomment.jsx'
+import Editcomment from './comment/editcomment.jsx'
+import Deletecomment from './comment/deletecomment.jsx'
+
+
 // everything you dictate here is the route for all
 
 function MainRouter() {
@@ -21,15 +27,15 @@ function MainRouter() {
             <Route exact path="/feed" element={<FeedPage/>} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/signin" element={<Signin />} />
-            <Route
-                path="/users/edit/:userId"
-                element={
-                <PrivateRoute>
-                    <EditProfile />
-                </PrivateRoute>
-                }
-            />
+            <Route path="/users/edit/:userId" element={<PrivateRoute><EditProfile /></PrivateRoute>}/>
             <Route path="/users/:userId" element={<Profile />} /> 
+            <Route path="/comment" element={<Comments/>}/> 
+            <Route path="/usercomment/:commentId" element={<Usercomment />} />
+
+            <Route path="/editcomment" element ={<Editcomment/>}/>
+            <Route path="/deletecomment" element ={<Deletecomment/>}/>
+
+
         </Routes>
     </div>
     )
