@@ -8,7 +8,7 @@ export default defineConfig({
     rollupOptions: {
       input: './index.html' //./src/main.jsx",
     },
-    outDir: '../dist/app',
+    outDir: 'dist',
   },
   server: {
     proxy: {
