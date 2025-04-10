@@ -13,6 +13,10 @@ import commentRoutes from './routes/comment.routes.js'
 import path from 'path'
 
 const app = express()
+app.use(cors({
+    origin: 'https://r-cent-s-g8u3.vercel.app/',
+    credentials: true,
+}))
 const CURRENT_WORKING_DIR = process.cwd();
 app.get('/', (req, res) => {
     res.status(200).send(Template()) 
@@ -29,10 +33,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(compress())
 app.use(helmet())
-app.use(cors({
-    origin: 'https://r-cent-s-g8u3.vercel.app/',
-    credentials: true,
-}))
 app.use((err, req, res, next) => {
     if (err.name === 'UnauthorizedError') {
         res.status(401).json({"error" : err.name + ": " + err.message}) 
