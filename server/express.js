@@ -14,7 +14,7 @@ import path from 'path'
 
 const app = express()
 app.use(cors({
-    origin: 'https://r-cent-s-g8u3.vercel.app/',
+    origin: 'https://r-cent-s-g8u3.vercel.app',
     credentials: true,
 }))
 const CURRENT_WORKING_DIR = process.cwd();
