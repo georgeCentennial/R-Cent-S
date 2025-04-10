@@ -1,9 +1,9 @@
 import { defineConfig } from "vite";
-import {viteSingleFile} from "vite-plugin-singlefile"
 import react from "@vitejs/plugin-react";
 const { PORT = 3000} = process.env;
 export default defineConfig({
-  plugins: [react(), viteSingleFile()],
+  base: "./",
+  plugins: [react()],
   build: {
     manifest: true,
     rollupOptions: {
