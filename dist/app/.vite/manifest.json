@@ -11,12 +11,12 @@
     "file": "assets/unicornbikeImg-oXywOdlb.jpg",
     "src": "assets/images/unicornbikeImg.jpg"
   },
-  "src/main.jsx": {
+  "index.html": {
     "assets": [
       "assets/rcentsSmallLogo-Iy2oxh7D.png"
     ],
-    "file": "assets/main-FxdTjn0-.js",
+    "file": "assets/index-Or2MtxaK.js",
     "isEntry": true,
-    "src": "src/main.jsx"
+    "src": "index.html"
   }
 }
