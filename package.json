@@ -16,7 +16,8 @@
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "helmet": "^8.1.0",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "vite": "^6.2.5"
   },
   "scripts": {
     "dev": "concurrently 'vite' \"nodemon server.js\"",
