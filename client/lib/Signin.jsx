@@ -71,9 +71,9 @@ console.log(user)
     setValues({ ...values, [name]: event.target.value })
   }
 
-  const {from} = {
+  const {from} = location.state || {
       from: {
-        pathname: '/feed'
+        pathname: '/'
       }
   }
   const {redirectToReferrer} = values
