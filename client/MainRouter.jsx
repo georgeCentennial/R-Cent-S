@@ -11,6 +11,7 @@ import Signin from './lib/Signin.jsx'
 import PrivateRoute from './lib/PrivateRoute.jsx'
 import Menu from './core/Menu'
 //my posts
+import MyPostsPage from './pages/MyPostsPage.jsx';
 import MyCommentsPage from './pages/MyCommentsPage.jsx';
 import Comments from './comment/comment.jsx'
 import Usercomment from './comment/usercomment.jsx'
@@ -47,7 +48,7 @@ function MainRouter() {
             } /> 
             <Route path="/myposts" element={
                 <PrivateRoute>
-                    
+                    <MyPostsPage/>
                 </PrivateRoute>
             } />
             <Route path='/mycomments' element={
